@@ -12,12 +12,16 @@ const id = Date.now().toString() + '-' + ('0000' + Math.floor(Math.random()*1000
 let warm = false
 let lastAccess = null
 
-const funcName = process.env.AWS_LAMBDA_FUNCTION_NAME
+const funcName = 'nimbloo-cpu-test-bill'
 const funcVersion = process.env.AWS_LAMBDA_FUNCTION_VERSION
 
 const delay = ms => new Promise(res => setTimeout(res, ms))
 
-module.exports = (event,cfg = {}) => {
+exports.handler=function (event, context, callback) {
+  warmF(event);
+}
+
+function warmF(event,cfg = {}) {
 
   let config = Object.assign({}, {
     flag: 'warmer', // default test flag
